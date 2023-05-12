@@ -14,7 +14,7 @@ has_site_name = input('Has site name? [y/n]: ')
 if has_site_name == 'y':
     url += input('Enter site name: ')
 # Иначе спрашиваем IP-адрес и порт
-else:
+elif has_site_name == 'n':
     url += input('Enter IP-address: ')
     url += ':' + input('Enter port: ')
 # Вводим путь, по которому будет доступна страница

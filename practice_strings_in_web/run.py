@@ -1,7 +1,7 @@
 from flask import Flask
 
 print('Form url...\n')
-from task_url import url_link
+from task_url import url
 print('Create HTML...\n')
 from task_html import html_text
 
@@ -10,8 +10,8 @@ app = Flask(__name__, static_url_path='', static_folder='images')
 
 
 url_prefix = 'http://127.0.0.1'
-if url_link.startswith(url_prefix):
-    url_postfix = url_link[len(url_prefix):]
+if url.startswith(url_prefix):
+    url_postfix = url[len(url_prefix):]
     port = url_postfix[1: url_postfix.index('/')]
     if not port.isnumeric():
         raise ValueError('Номер порта сформирован некорректно. '
