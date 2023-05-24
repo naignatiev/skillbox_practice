@@ -6,6 +6,7 @@
 #      *
 #    *
 # | |W| |
+from random import randint
 
 
 # Наше стартовое меню
@@ -23,11 +24,11 @@ if command == 1:
     ship_pos = 1
     # Позиции звёздочек
     # Дальнее поле
-    star_1_pos = 0
+    star_1_pos = randint(0, 2)
     # Среднее поле
-    star_2_pos = 1
+    star_2_pos = randint(0, 2)
     # Ближайшее поле
-    star_3_pos = 2
+    star_3_pos = randint(0, 2)
     # Запускаем бесконечный цикл игрового процесса
     while True:
         # ПЕРВАЯ СТАДИЯ: ВЫВОД ИГРОВОГО ПОЛЯ
@@ -57,17 +58,24 @@ if command == 1:
         # ВТОРАЯ СТАДИЯ: ОБРАБОТКА КОМАНДЫ ПОЛЬЗОВАТЕЛЯ
         command = input()
         # Движение влево
-        if command == 'L':
+        if command == 'L' and ship_pos > 0:
             ship_pos -= 1
-            if ship_pos < 0:
-                ship_pos = 0
-        if command == 'R':
+        if command == 'R' and ship_pos < 2:
             ship_pos += 1
-            if ship_pos > 2:
-                ship_pos = 2
         # ТРЕТЬЯ СТАДИЯ: ДВИЖЕНИЕ ЗВЁЗД И НАКОПЛЕНИЕ ОЧКОВ
+        # Накопление очков
+        if star_3_pos == ship_pos:
+            score += 1
+        # Движение звёзд
+        star_3_pos = star_2_pos
+        star_2_pos = star_1_pos
+        star_1_pos = randint(0, 2)
+
+        if score == 5:
+            print('Вы выиграли!')
+            command = input('Хотите продолжить игру? [y/n]: ')
+            if command == 'n':
+                break
 
 
 # Иначе ничего не делаем. Программа завершается
-else:
-    pass
